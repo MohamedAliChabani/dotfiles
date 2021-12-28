@@ -179,21 +179,20 @@ bindsym $mod+r mode "resize"
 
 
 #I3 Gaps
-for_window [class="^.*"] border pixel 3
-for_window [class=".*"] title_format "  %title"
+for_window [class="^.*"] border pixel 3 
 smart_borders on
-#smart_gaps on
-gaps outer 5
-gaps inner 10
+smart_gaps on
+#gaps outer 3
+#gaps inner 7
 
 #open browser
-bindsym $mod+b exec firefox
+bindsym $mod+b exec firefox ~/mycustom-start-page/index.html
 
 #open file manager
 bindsym $mod+shift+f exec kitty ranger
 
 #set background
-exec_always feh --bg-fill /home/dalichabani/Pictures/Wallpapers/wall_secondary.png
+exec_always feh --bg-fill /home/dalichabani/Pictures/Wallpapers/gruvbox_manga-triangle.jpg
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
@@ -231,13 +230,13 @@ bindsym $mod+Shift+s exec maim -s | xclip -selection clipboard -t image/png
 set $bg       #282828
 set $fg       #d4be98
 set $red      #fb4934
-set $green    #a9b665
-set $blue     #7daea3
+set $green    #b8bb26
+set $blue     #076678
 set $purple   #d3869b
 set $aqua     #8ec07c
 set $darkgray #282828
 set $yellow   #fabd2a
-
+set $pink     #d3869b
 
 
 #############
@@ -255,8 +254,8 @@ bar {
             # workspaces section
             #                    border     backgr.     text
 
-            focused_workspace    $yellow    $yellow     $bg
-            inactive_workspace   $bg        $aqua       $bg
+            focused_workspace    $aqua      $aqua       $bg
+            inactive_workspace   $bg        $pink       $bg
             active_workspace     $bg        $blue       $bg
             urgent_workspace     $red       $red        $fg
 
@@ -269,13 +268,14 @@ position top
 #### i3 appearance ####
 #######################
 #       Gruvbox Theme   brdr        bg          text    indictr     chld_brdr
-client.focused          $yellow     $yellow     $bg     $purple     $yellow
-client.focused_inactive $aqua       $aqua       $bg     $aqua       $aqua
-client.unfocused        $bg         $bg         $bg     $bg         $bg
+client.focused          $aqua       $aqua       $bg     #D8DEE9     $aqua
+client.focused_inactive $pink       $pink       $bg     $pink       $pink
+client.unfocused        $pink       $pink       $bg     $bg         $pink
 client.urgent           $red        $red        $bg     $red        $red
 client.placeholder      $bg         $bg         $bg     $bg         $bg
 client.background       $bg
 
 
 
-exec_always kitty xrandr --output eDP-1-1 --set "PRIME Synchronization" 1
+#compositor
+exec_always picom --experimental-backends
