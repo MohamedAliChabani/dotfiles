@@ -13,10 +13,10 @@
 	--red: #ac8aac;
     --yellow: #aca98a;
 
-	--bg: #000000;
+	--bg: #282828;
 	--fg: #191919;
 
-	--search-bg: rgba(255, 255, 255, 0);
+	--search-bg: #282828;
 }
 
 body {
@@ -75,7 +75,7 @@ form:focus-within input::placeholder {
 }
 
 #main_window {
-	background-color: var(--fg);
+	background-color: #282828;
 	width: 1210px;
 	padding-right: 40px;
 	margin: 0;
@@ -108,22 +108,22 @@ form:focus-within input::placeholder {
 }
 
 #links_container a:hover {
-	color: var(--blue);
+	color: #8ec07c;
 	transition: all 0.4s;
 }
 
 .subtitle {
     font-size: 21px;
 	font-weight: bold;
-	color: #FDAC68;
+	color: #8ec07c;
 }
 
 .title {
-    font-family: "UbuntuMono Nerd Font"!important;
+    font-family: "Ubuntu Monospace"!important;
     margin-bottom: 10px;
     margin-left: 7px;
 	font-weight: bold;
-	color: #ff6002;
+	color: #d3869b;
 }
 
 .image {
