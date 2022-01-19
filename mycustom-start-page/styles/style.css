@@ -21,7 +21,7 @@
 
 body {
 	background-color: var(--bg);
-	font-family: 'UbuntuMono Nerd Font', monospace;
+	font-family: 'Source Code Pro', monospace;
 	color: var(--red);
 	transition: all 0.25s ease-out;
 }
@@ -54,13 +54,13 @@ form {
 
 form input[type="search"] {
 	background-color: var(--search-bg);
-	border: double;
 	box-sizing: border-box;
+	border: double;
 	font-weight: bold;
 	font: inherit;
 	margin-left: 15px;
 	width: 95%;
-	color: var(--yellow);
+	color: #d3869b;
 	transition: all 0.2s;
 }	
 
