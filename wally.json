@@ -1,0 +1,60 @@
+{
+	"icons": [ "awesome-fonts" ],
+	"colors": [ "wal" ],
+	"defaults": {
+		"separator-block-width": 0,
+		"critical": {
+			"fg": "background",
+			"bg": "color5"
+		},
+		"warning": {
+			"fg": "background",
+			"bg": "color6"
+		},
+		"default-separators": false
+	},
+	"cycle": [
+		{
+			"fg": "foreground",
+			"bg": "background"
+		},
+		{
+			"fg": "background",
+			"bg": "foreground"
+		}
+	],
+	"date": {
+			"fg": "background",
+			"bg": "color3"
+		},
+
+	"cpu": {
+		"fg": "background",
+		"bg": "color5"
+	},
+	"memory": {
+		"fg": "background",
+		"bg": "color1"
+	},
+	"time": {
+		"fg": "background",
+		"bg": "color4"
+	},
+
+	"network": {
+		"fg": "background",
+		"bg": "color7"
+	},
+
+
+	"battery": {
+		"charged": {
+			"fg": "background",
+			"bg": "color6"
+		},
+		"AC": {
+			"fg": "background",
+			"bg": "color6"
+		}
+	}
+}
