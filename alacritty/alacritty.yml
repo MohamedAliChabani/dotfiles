@@ -49,6 +49,8 @@ window:
     x: 10
     y: 10
 
+  opacity: 0.93
+
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
 
@@ -67,7 +69,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.93
+  #background_opacity: 0.93
   #background_opacity: 1.0
 
   # Startup Mode (changes require restart)
@@ -118,7 +120,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: CozetteVector
+    family: JetBrainsMono NerdFont
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
@@ -129,7 +131,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: CozetteVector 
+    family: JetBrainsMono NerdFont
 
     # The `style` can be specified to pick a specific face.
     #style: Bold
@@ -140,7 +142,8 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: CozetteVector
+    #family: CozetteVector
+    family:  JetBrainsMono NerdFont
 
     # The `style` can be specified to pick a specific face.
     #style: Italic
@@ -151,13 +154,13 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: CozetteVector
+    family: JetBrainsMono NerdFont
 
     # The `style` can be specified to pick a specific face.
     #style: Bold Italic
 
   # Point size
-  size: 13.0
+  size: 15.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -874,27 +877,27 @@ font:
 # BEGIN ACE
 colors:
   primary:
-    background: '#0b110f'
-    foreground: '#c8cdc0'
+    background: '#0a0410'
+    foreground: '#d0d2cf'
   cursor:
-    text:       '#0b110f'
-    cursor:     '#c8cdc0'
+    text:       '#0a0410'
+    cursor:     '#d0d2cf'
   normal:
-    black:      '#0b110f'
-    red:        '#32535F'
-    green:      '#576453'
-    yellow:     '#7F6E7D'
-    blue:       '#75875E'
-    magenta:    '#979E66'
-    cyan:       '#B9B768'
-    white:      '#c8cdc0'
+    black:      '#0a0410'
+    red:        '#D03179'
+    green:      '#966164'
+    yellow:     '#D39D74'
+    blue:       '#667785'
+    magenta:    '#BD4C86'
+    cyan:       '#66A0A6'
+    white:      '#d0d2cf'
   bright:
-    black:      '#8c8f86'
-    red:        '#32535F'
-    green:      '#576453'
-    yellow:     '#7F6E7D'
-    blue:       '#75875E'
-    magenta:    '#979E66'
-    cyan:       '#B9B768'
-    white:      '#c8cdc0'
+    black:      '#919390'
+    red:        '#D03179'
+    green:      '#966164'
+    yellow:     '#D39D74'
+    blue:       '#667785'
+    magenta:    '#BD4C86'
+    cyan:       '#66A0A6'
+    white:      '#d0d2cf'
 # END ACE
