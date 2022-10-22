@@ -12,9 +12,10 @@
 #Basic Definition
 set $mod Mod4
 font pango:scientifica 13
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 4
 #smart_gaps on
 #smart_borders on
+
 gaps outer 5
 gaps inner 10
 
@@ -24,13 +25,13 @@ floating_modifier $mod
 #AUTOSTART
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec setxkbmap -option caps:swapescape
-exec alacritty --class newsboat -e newsboat
-#exec alacritty --class cmus -e cmus
+#exec alacritty --class newsboat -e newsboat
 exec alacritty --class pulse -e pulsemixer
-exec alacritty --class dropdown
+#exec alacritty --class dropdown
 exec alacritty --class ranger -e ranger
-exec alacritty --class math -e qalc
+#exec alacritty --class math -e qalc
+
+exec setxkbmap -option caps:swapescape
 exec xset r rate 300 50
 #KEYBINDINGS
 
@@ -45,7 +46,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec --no-startup-id rofi -show drun -width 400 -lines 5 -font "scientifica 13" -hide-scrollbar -glob -separator-style "dash"
+bindsym $mod+d exec --no-startup-id dmenu_run -nb '$c0' -nf '$c15' -sb '$c5' -sf '$c15'
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -92,16 +93,19 @@ bindsym $mod+Shift+ccedilla move container to workspace $ws9
 bindsym $mod+Shift+agrave move container to workspace $ws10
 
 
-bindsym Print exec maim $(date +$HOME/Pictures/Screenshots/Screenshot_%Y-%m-%d_%H%M%S.png)
+bindsym Print exec scrot -e 'mv $f ~/Pictures/Screenshots/'
 bindsym $mod+Shift+s exec maim -s | xclip -selection clipboard -t image/png
 
 bindsym $mod+Shift+a mode "resize"
 bindsym $mod+a mode "gaps"
 
-bindsym $mod+b exec brave-browser --new-window
-bindsym $mod+shift+b exec brave-browser --incognito
+bindsym $mod+b exec firefox --new-window
+bindsym $mod+shift+b exec firefox --private-window
 bindsym $mod+f exec alacritty -e ranger
 bindsym $mod+Shift+f exec alacritty -e sudo ranger
+
+bindsym $mod+dead_circumflex exec keepassxc
+
 
 bindsym $mod+shift+x exec i3lock
 
@@ -122,21 +126,6 @@ set $ws9 "九"
 set $ws10 "十"
 
 
-
-#mode "resize" {
- #       bindsym h resize shrink width 10 px or 10 ppt
- #        bindsym j resize grow height 10 px or 10 ppt
- #        bindsym k resize shrink height 10 px or 10 ppt
- #        bindsym l resize grow width 10 px or 10 ppt
- #
- #        # back to normal: Enter or Escape or $mod+r
- #        bindsym Return mode "default"
- #        bindsym Escape mode "default"
- #        bindsym a mode "default"
- #}
-
-
-
 bindsym $mod+ctrl+h resize shrink width 10 px or 10 ppt
 bindsym $mod+ctrl+j resize grow height 10 px or 10 ppt
 bindsym $mod+ctrl+k resize shrink height 10 px or 10 ppt
@@ -144,12 +133,12 @@ bindsym $mod+ctrl+l resize grow width 10 px or 10 ppt
 
 
 mode "gaps" {
-    bindsym d          gaps inner current set 10; gaps outer current set 5
+    bindsym d                      gaps inner current set 10; gaps outer current set 5
 	bindsym i		   gaps inner current plus 2
-	bindsym Shift+i	   gaps inner current minus 2
+	bindsym Shift+i	           gaps inner current minus 2
 	bindsym w		   gaps inner current set 0; gaps outer current set 0
 	bindsym o		   gaps outer current plus 2
-	bindsym Shift+o    gaps outer current minus 2
+	bindsym Shift+o            gaps outer current minus 2
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -162,9 +151,72 @@ mode "gaps" {
 for_window[window_role="pop-up"] floating enable
 for_window[window_role="task_dialog"] floating enbale
 
+exec_always picom --vsync --backend glx
+exec_always wal -R
+
+# --------scratchpads--------
+#Dropdown
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 650 500
+for_window [instance="dropdown"] move scratchpad
+for_window [instance="dropdown"] border pixel 6
 
 
-set $transp       #00000000
+bindsym $mod+Shift+u exec alacritty --class dropdown
+bindsym $mod+u [instance="dropdown"] scratchpad show; move position center
+
+#ranger
+for_window [instance="ranger"] floating enable
+for_window [instance="ranger"] resize set 800 600
+for_window [instance="ranger"] move scratchpad
+for_window [instance="ranger"] border pixel 6
+
+
+bindsym $mod+Shift+i exec alacritty --class ranger -e ranger
+bindsym $mod+i [instance="ranger"] scratchpad show; move position center
+
+#Pulse
+for_window [instance="pulse"] floating enable
+for_window [instance="pulse"] resize set 550 400
+for_window [instance="pulse"] move scratchpad
+for_window [instance="pulse"] border pixel 6
+
+
+bindsym $mod+Shift+o exec alacritty --class pulse -e pulsemixer
+bindsym $mod+o [instance="pulse"] scratchpad show; move position center
+
+#Cmus
+for_window [instance="cmus"] floating enable
+for_window [instance="cmus"] resize set 550 400
+for_window [instance="cmus"] move scratchpad
+for_window [instance="cmus"] border pixel 6
+
+
+bindsym $mod+Shift+p exec alacritty --class cmus -e cmus /media/dalichabani/DATA/Music
+bindsym $mod+p [instance="cmus"] scratchpad show; move position center
+
+#newsboat
+for_window [instance="newsboat"] floating enable
+for_window [instance="newsboat"] resize set 1000 800
+for_window [instance="newsboat"] move scratchpad
+for_window [instance="newsboat"] border pixel 6
+
+
+bindsym $mod+Shift+n exec alacritty --class newsboat -e newsboat
+bindsym $mod+n [instance="newsboat"] scratchpad show; move position center
+
+
+#MATH
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 900 200
+for_window [instance="math"] move scratchpad
+for_window [instance="math"] border pixel 6
+
+bindsym $mod+Shift+y exec alacritty --class math -e qalc
+bindsym $mod+y [instance="math"] scratchpad show; move position center
+
+
+
 
 set_from_resource $c0 i3wm.color0 #f0f0f0
 set_from_resource $c1 i3wm.color1 #f0f0f0
@@ -193,88 +245,22 @@ client.placeholder      $c2     $c2     $c7  $c2       $c2
 client.background       $c0
 
 
-
 #############
 #### BAR ####
 #############
 bar {
-	position top
-	id bar-1
-	status_command ~/.config/i3/bumblebee-status/bumblebee-status \
-    -m spotify cpu memory date time battery network \
-    -p spotify.layout='spotify.song' date.left-click="alacritty -e calcurse" disk.left-click="pcmanfm" cpu.left-click="alacritty -e gotop -p" memory.left-click="alacritty -e gotop -p" time.left-click="alacritty -e tty-clock -b -c -s"  time.format="%H:%M" \
-	-t wally
-	colors {
-		background $c0
-		separator #ebdbb2
-		#<colorclass> <border> <background> <text>
-		focused_workspace  $c7   $c7   $c2
-		inactive_workspace $c2    $c2    $c7
-		urgent_workspace   #cc241d #900000 #fb4934
-	}
+        position top
+        id bar-1
+        status_command ~/.config/i3/bumblebee-status/bumblebee-status \
+    -m cpu memory date time battery network \
+    -p date.left-click="alacritty -e calcurse" disk.left-click="pcmanfm" cpu.left-click="alacritty -e gotop -p" memory.left-click="alacritty -e htop -p" time.left-click="alacritty -e tty-clock -b -c -s"  time.format="%H:%M" \
+        -t wally
+        colors {
+                background $c0
+                separator #ebdbb2
+                #<colorclass> <border> <background> <text>
+                focused_workspace  $c7   $c7   $c2
+                inactive_workspace $c2    $c2    $c7
+                urgent_workspace   #cc241d #900000 #fb4934
+        }
 }
-
-
-exec_always picom --vsync --experimental-backends
-exec_always wal -R
-
-# --------scratchpads--------
-#Dropdown
-for_window [instance="dropdown"] floating enable
-for_window [instance="dropdown"] resize set 650 500
-for_window [instance="dropdown"] move scratchpad
-for_window [instance="dropdown"] border pixel 7
-
-
-bindsym $mod+Shift+u exec alacritty --class dropdown
-bindsym $mod+u [instance="dropdown"] scratchpad show; move position center
-
-#ranger
-for_window [instance="ranger"] floating enable
-for_window [instance="ranger"] resize set 750 600
-for_window [instance="ranger"] move scratchpad
-for_window [instance="ranger"] border pixel 7
-
-
-bindsym $mod+Shift+i exec alacritty --class ranger -e ranger
-bindsym $mod+i [instance="ranger"] scratchpad show; move position center
-
-#Pulse
-for_window [instance="pulse"] floating enable
-for_window [instance="pulse"] resize set 550 400
-for_window [instance="pulse"] move scratchpad
-for_window [instance="pulse"] border pixel 7
-
-
-bindsym $mod+Shift+o exec alacritty --class pulse -e pulsemixer
-bindsym $mod+o [instance="pulse"] scratchpad show; move position center
-
-#Cmus
-for_window [instance="cmus"] floating enable
-for_window [instance="cmus"] resize set 550 400
-for_window [instance="cmus"] move scratchpad
-for_window [instance="cmus"] border pixel 7
-
-
-bindsym $mod+Shift+p exec alacritty --class cmus -e cmus /media/dalichabani/DATA/Music
-bindsym $mod+p [instance="cmus"] scratchpad show; move position center
-
-#newsboat
-for_window [instance="newsboat"] floating enable
-for_window [instance="newsboat"] resize set 1000 800
-for_window [instance="newsboat"] move scratchpad
-for_window [instance="newsboat"] border pixel 7
-
-
-bindsym $mod+Shift+n exec alacritty --class newsboat -e newsboat
-bindsym $mod+n [instance="newsboat"] scratchpad show; move position center
-
-
-#MATH
-for_window [instance="math"] floating enable
-for_window [instance="math"] resize set 900 200
-for_window [instance="math"] move scratchpad
-for_window [instance="math"] border pixel 7
-
-bindsym $mod+Shift+y exec alacritty --class math -e qalc
-bindsym $mod+y [instance="math"] scratchpad show; move position center
