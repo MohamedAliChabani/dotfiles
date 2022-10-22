@@ -45,6 +45,10 @@
 		"fg": "background",
 		"bg": "color7"
 	},
+	"spotify": {
+		"fg": "background",
+		"bg": "color2"
+	},
 
 
 	"battery": {
