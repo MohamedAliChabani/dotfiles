@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+CAPACITY_FILE = "/sys/class/power_supply/BAT1/capacity"
+STATUS_FILE = "/sys/class/power_supply/BAT1/uevent"
+
+
+with open(CAPACITY_FILE, encoding="utf-8") as f:
+    content = f.readlines()
+
+with open(STATUS_FILE, encoding="utf-8") as sf:
+    status = sf.readlines()
+
+
+battery_lvl = int(content[0].rstrip('\n'))
+
+
+if status[2].find("Charging") != -1 :
+    print(f"🔌 {battery_lvl}% ")
+elif battery_lvl > 100:
+    print("🔋 100%")
+elif battery_lvl > 20:
+    print(f"🔋 {battery_lvl}%")
+else:
+    print(f"🚨 {battery_lvl}%")

@@ -28,7 +28,7 @@ font:
     family: Caskaydia Cove Nerd Font Mono
 
   size: 14.0
-  #size: 19.0
+  # size: 19.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -775,8 +775,4 @@ import:
 # uncomment the flavour you want below:
   - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
 #  - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
-#  # Enable true color support
-
-allow_dynamic_title: true
-allow_osc8: true
-term: xterm-256color- ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
+#  - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml

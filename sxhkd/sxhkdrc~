@@ -1,0 +1,181 @@
+#           _     _       _
+#          | |   | |     | |
+#  _____  _| |__ | | ____| |
+# / __\ \/ / '_ \| |/ / _` |
+# \__ \>  <| | | |   < (_| |
+# |___/_/\_\_| |_|_|\_\__,_|
+
+
+# make sxhkd reload its configuration files:
+super + r
+	pkill -USR1 -x sxhkd
+
+#
+# bspwm hotkeys
+#
+
+# quit/restart bspwm
+super + shift + e
+    bspc quit
+
+super + shift + r
+    bspc wm -r
+
+# close and kill
+super + shift + q
+    bspc node -c
+
+# toggle fullscreen
+super + shift +m
+	bspc node -t ~fullscreen
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+#
+# state/flags
+#
+
+super + shift + space
+    bspc node -t ~floating
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
+super + q
+    bspc node -f @parent
+
+# focus the next/previous node in the current desktop
+# super + {_,shift + }c
+# 	bspc node -f {next,prev}.local
+super + Tab
+    bspc node -f next.local
+super + shift + Tab
+    bspc node -f prev.local
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+#
+# preselect
+#
+
+# preselect the direction
+super + alt + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselealt the ratio
+super + alt + {1-9}
+	bspc node -o 0.{1-9}
+
+# alt the preselection for the focused node
+super + alt + space
+	bspc node -p alt
+
+# alt the preselection for the focused desktop
+super + alt + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspalt node id -p cancel
+
+# BORDERS
+super + t
+    ~/.config/bspwm/scripts/borders.sh 4
+
+# GAPS
+super + {_, shift +} i
+    ~/.config/bspwm/scripts/gaps.sh {inc, dec}
+
+super + a; {d, w}
+    ~/.config/bspwm/scripts/gaps.sh {normal, del}
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + ctrl + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+# ------------------------Media Keys-----------------------
+XF86AudioPlay
+    playerctl play-pause
+
+XF86AudioNext
+    playerctl next
+
+XF86AudioPrev
+    playerctl previous
+
+XF86AudioRaiseVolume
+    amixer -q -D pulse sset Master 5%+
+
+XF86AudioLowerVolume
+    amixer -q -D pulse sset Master 5%-
+
+XF86AudioMute
+    amixer -q -D pulse sset Master toggle
+
+# ------------------------Workspaces-----------------------
+super + {_,shift + }{ampersand,eacute,quotedbl,apostrophe,parenleft,minus,egrave,underscore,ccedilla,agrave}
+    bspc {desktop -f, node -d} ^{1-9,10}
+
+# ------------------------SPAWN COMMANDS-----------------------
+super + Return
+	alacritty
+
+super + shift + Return
+    emacsclient -c -a "emacs"
+
+super + d
+	dmenu_run
+
+super + b
+    firefox --new-window
+
+super + shift + b
+    firefox --private-window
+
+super + ugrave
+    nitrogen
+
+super + dead_circumflex
+    keepassxc
+
+super + g
+    alacritty -e htop
+
+super + f
+    alacritty -e ranger
+
+super + shift + s; {a, s, p, r, b}
+    alacritty -e nvim {~/.config/alacritty/alacritty.yml, \
+                    ~/.config/sxhkd/sxhkdrc, \
+                    ~/.config/picom/picom.conf, \
+                    ~/.config/ranger/rc.conf, \
+                    ~/.config/bspwm/bspwmrc}
