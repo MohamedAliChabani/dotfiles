@@ -106,6 +106,8 @@ mode "gaps" {
     bindsym a mode "default"
 }
 
+# APP launching
+
 bindsym $mod+Return exec --no-startup-id $term
 bindsym $mod+Shift+Return exec emacsclient -c -a "emacs"
 bindsym $mod+b exec brave-browser
@@ -114,14 +116,11 @@ bindsym $mod+f exec $term -e ranger
 bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+t exec $term -e calcurse
 bindsym $mod+Shift+f exec $term -e sudo ranger
-bindsym $mod+Shift+comma exec notable
+bindsym $mod+Shift+comma exec --no-startup-id "flatpak run org.onlyoffice.desktopeditors & disown & exit"
 bindsym $mod+w exec gpick
 bindsym $mod+dead_circumflex exec keepassxc
 bindsym $mod+dollar exec krita
 bindsym $mod+ugrave exec nitrogen
-
-bindsym $mod+shift+x exec i3lock
-
 
 bindsym $mod+g exec $term -e htop
 bindsym $mod+shift+g exec $term -e gotop -p
@@ -149,6 +148,7 @@ for_window[window_role="pop-up"] floating enable
 for_window[window_role="task_dialog"] floating enbale
 
 for_window[class="Nitrogen"] floating enable
+for_window[class="test"] floating enable
 
 # --------scratchpads---------------------
 #Dropdown
@@ -158,7 +158,7 @@ for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 6
 
 
-bindsym $mod+Shift+u exec $term --class dropdown
+bindsym $mod+Shift+u exec $term -o window.opacity=1 --class dropdown
 bindsym $mod+u [instance="dropdown"] scratchpad show; move position center
 
 #ranger
@@ -168,7 +168,7 @@ for_window [instance="ranger"] move scratchpad
 for_window [instance="ranger"] border pixel 6
 
 
-bindsym $mod+Shift+i exec $term --class ranger -e ranger
+bindsym $mod+Shift+i exec $term -o window.opacity=1 --class ranger -e ranger
 bindsym $mod+i [instance="ranger"] scratchpad show; move position center
 
 #Pulse
@@ -178,29 +178,8 @@ for_window [instance="pulse"] move scratchpad
 for_window [instance="pulse"] border pixel 6
 
 
-bindsym $mod+Shift+o exec $term --class pulse -e pulsemixer
+bindsym $mod+Shift+o exec $term -o window.opacity=1 --class pulse -e pulsemixer
 bindsym $mod+o [instance="pulse"] scratchpad show; move position center
-
-#Cmus
-for_window [instance="cmus"] floating enable
-for_window [instance="cmus"] resize set 550 400
-for_window [instance="cmus"] move scratchpad
-for_window [instance="cmus"] border pixel 6
-
-
-bindsym $mod+Shift+p exec $term --class cmus -e cmus /media/dalichabani/DATA/Music
-bindsym $mod+p [instance="cmus"] scratchpad show; move position center
-
-#newsboat
-for_window [instance="newsboat"] floating enable
-for_window [instance="newsboat"] resize set 1000 800
-for_window [instance="newsboat"] move scratchpad
-for_window [instance="newsboat"] border pixel 6
-
-
-bindsym $mod+Shift+n exec $term --class newsboat -e newsboat
-bindsym $mod+n [instance="newsboat"] scratchpad show; move position center
-
 
 #MATH
 for_window [instance="math"] floating enable
@@ -208,7 +187,7 @@ for_window [instance="math"] resize set 900 200
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 6
 
-bindsym $mod+Shift+y exec $term --class math -e qalc
+bindsym $mod+Shift+y exec $term -o window.opacity=1 --class math -e qalc
 bindsym $mod+y [instance="math"] scratchpad show; move position center
 #-------------------------------------------------------------------------
 
