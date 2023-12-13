@@ -28,7 +28,7 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -40,12 +40,10 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
-color_prompt=yes
-
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-force_color_prompt=yes
+#force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -81,22 +79,18 @@ if [ -x /usr/bin/dircolors ]; then
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+    #alias grep='grep --color=auto'
+    #alias fgrep='fgrep --color=auto'
+    #alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+#alias ll='ls -l'
+#alias la='ls -A'
+#alias l='ls -CF'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -118,70 +112,33 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Import colorscheme from 'wal' asynchronously
-(cat ~/.cache/wal/sequences &)
+# vi mode
+set -o vi
+bind -m vi-insert "\C-l":clear-screen
 
-. "${HOME}/.cache/wal/colors.sh"
+# Prompt
+export PS1="\[\e[32m\][\[\e[m\]\[\e[35m\]\u\[\e[m\]@\[\e[31m\]\h\[\e[m\] \[\e[33m\]\W\[\e[m\]\[\e[32m\]]\[\e[m\]\[\e[34m\]\\$\[\e[m\] "
+
+# PATH
+export PATH="$PATH:/home/dalichabani/.local/bin:/usr/local/go/bin:/home/dalichabani/.local/nvim-linux64/bin/"
+export PATH="$PATH:/home/dalichabani/.local/scripts"
 
 # Aliases
-alias dmen='dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
-
+alias r="ranger"
+alias v="lvim"
+alias h="htop"
+alias ls="ls -p --color=auto"
+alias l="ls -alh"
+alias la="ls -ap"
+alias ka="killall"
+alias grep="grep --color=always"
+alias bat="batcat"
 alias cl="clear"
+alias office="flatpak run org.onlyoffice.desktopeditors & disown & exit"
+alias yt-local="python3 ~/Gitrepos/yt-local/server.py"
 
-alias apti="sudo apt install"
-alias aptr="sudo apt remove"
-alias aptin="apt info"
-alias aptor="sudo apt autoremove"
-alias aptup="sudo apt update && sudo apt upgrade"
-alias aptu="sudo apt update"
-alias aptg="sudo apt upgrade"
 alias apts="apt search"
 
-alias v="nvim"
-alias r="ranger"
-
-alias cfi="nvim ~/.config/i3/config"
-alias cfr="nvim ~/.config/ranger/rc.conf"
-alias brc="nvim ~/.bashrc"
-
-alias ..="cd .."
-
-alias mkd="mkdir"
-
-alias g="git"
-alias gcl="git clone"
-
-alias ka="killall"
-
-#alias ls="exa --icons"
-#alias la="exa -a --icons"
-#alias l="exa -al"
-
-alias ls="ls --color -F"
-alias la="ls --color -F -a"
-alias l="ls --color -lah"
-
-
-alias anime="ani-cli -q best"
-alias blth="bluetoothctl"
-
-alias ssb="sudo systemctl start bluetooth"
-alias skb="sudo systemctl stop bluetooth"
-
-#enable vim mode
-set -o vi
-
-
-bind -m vi-command 'Control-l: clear-screen'
-bind -m vi-insert 'Control-l: clear-screen'
-
-
-export export PS1="\[\e[36m\][\[\e[m\]\[\e[32m\]\u\[\e[m\] 🍥 \[\e[35m\]\W\[\e[m\]\[\e[36m\]]\[\e[m\]\[\e[33m\]\\$\[\e[m\] "
-export EDITOR="nvim"
-
-
-################
-fortune | cowsay
-################
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export VISUAL=nvim;
+export EDITOR=nvim;
+export TERMINAL=alacritty;
